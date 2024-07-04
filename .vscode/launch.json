@@ -5,13 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
-            "request": "launch",
-            "name": "启动程序",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${file}"
-        }
+            "name": "vad_dis_train_debug",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "/data/yangpx/miniconda3/envs/vad/lib/python3.9/site-packages/torch/distributed/launch.py",
+                "console": "integratedTerminal",
+                "cwd": "/data/yangpx/Project/VAD",
+                "justMyCode": false,
+                "args": [
+                    "--nproc_per_node=2",
+                    "--master_port=28500", 
+                    "/data/yangpx/Project/VAD/tools/train.py", 
+                    "/data/yangpx/Project/VAD/projects/configs/VAD/VAD_base_e2e.py",
+                    "--launcher", "pytorch",
+                    "--deterministic",
+                    "--work-dir", "/data/yangpx/VAD/vad_dis_train_debug",
+                    
+                     
+                ],
+                "env": {"CUDA_VISIBLE_DEVICES":"0,1",
+                "PYTHONPATH": "/data/yangpx/Project/VAD"
+            },
+            },
     ]
 }
